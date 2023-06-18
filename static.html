@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exam</title>
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $("#showFormButton").click(function() {
+        $("#questionForm").show();
+      });
+      
+      $("#questionForm").submit(function(e) {
+        e.preventDefault(); 
+        var question = $("#questionInput").val();
+        
+        
+        $.ajax({
+          type: "POST",
+          url: "insert_question.php", 
+          data: { question: question },
+          success: function(response) {
+            
+            alert("Question submitted successfully!");
+          },
+          error: function(xhr, status, error) {
+           
+            alert("Error submitting question: " + error);
+          }
+        });
+      });
+    });
+  </script>
+  
+  
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #ffffff;
+      color: #000000;
+    }
+    
+    h1 {
+      color: #333;
+      text-align: center;
+    }
+    
+    label {
+      font-weight: bold;
+    }
+    
+    input[type="text"] {
+      width: 100%;
+      padding: 5px;
+      margin-bottom: 10px;
+    }
+    
+    #questions {
+      margin-bottom: 20px;
+    }
+    
+    h3 {
+      margin-top: 15px;
+    }
+    
+    .choices {
+      margin-bottom: 5px;
+    }
+    
+    .correct {
+      color: green;
+    }
+    
+    .wrong {
+      color: red;
+    }
+    
+    button {
+      display: block;
+      margin: 10px 0;
+      padding: 8px 15px;
+      background-color: #000;
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+    
+    #resultContainer {
+      margin-top: 20px;
+    }
+    
+    #resultContainer p {
+      margin-bottom: 5px;
+    }
+ 
+  </style>
+
+</head>
+<body>
+  
+  <button id="showFormButton">Show Form</button>
+  <form id="questionForm" style="display: none;">
+    <label for="questionInput">Question:</label>
+    <input type="text" id="questionInput" name="questionInput">
+    <button type="submit">Submit</button>
+  </form>
+  
+  
+  <h1>Exam</h1>
+  <label for="nameInput">Name:</label>
+  <input type="text" id="nameInput">
+  <div id="questions">
+    <div>
+     
+      <h3>Question 1:</h3>
+      <p>What is the capital of France?</p>
+      <div class="choices">
+        <input type="radio" name="question0" value="0">
+        <label>London</label>
+      </div>
+      <div class="choices">
+        <input type="radio" name="question0" value="1">
+        <label>Paris</label>
+      </div>
+      <div class="choices">
+        <input type="radio" name="question0" value="2">
+        <label>Madrid</label>
+      </div>
+      <div class="choices">
+        <input type="radio" name="question0" value="3">
+        <label>Rome</label>
+      </div>
+    </div>
+    <div>
+      <h3>Question 2:</h3>
+      <p>Which is the largest planet in our solar system?</p>
+      <div class="choices">
+        <input type="radio" name="question1" value="0">
+        <label>Mars</label>
+      </div>
+      <div class="choices">
+        <input type="radio" name="question1" value="1">
+        <label>Jupiter</label>
+      </div>
+      <div class="choices">
+        <input type="radio" name="question1" value="2">
+        <label>Saturn</label>
+      </div>
+      <div class="choices">
+        <input type="radio" name="question1" value="3">
+        <label>Neptune</label>
+      </div>
+    </div>
+    <div>
+      <h3>Question 3:</h3>
+      <p>Who painted the Mona Lisa?</p>
+      <div class="choices">
+        <input type="radio" name="question2" value="0">
+        <label>Leonardo da Vinci</label>
+      </div>
+      <div class="choices">
+        <input type="radio" name="question2" value="1">
+        <label>Pablo Picasso</label>
+      </div>
+      <div class="choices">
+        <input type="radio" name="question2" value="2">
+        <label>Vincent van Gogh</label>
+      </div>
+      <div class="choices">
+        <input type="radio" name="question2" value="3">
+        <label>Michelangelo</label>
+      </div>
+    </div>
+    <div>
+      <h3>Question 4:</h3>
+      <p>What is the chemical symbol for gold?</p>
+      <div class="choices">
+        <input type="radio" name="question3" value="0">
+        <label>Ag</label>
+      </div>
+      <div class="choices">
+        <input type="radio" name="question3" value="1">
+        <label>Au</label>
+      </div>
+      <div class="choices">
+        <input type="radio" name="question3" value="2">
+        <label>Cu</label>
+      </div>
+      <div class="choices">
+        <input type="radio" name="question3" value="3">
+        <label>Fe</label>
+      </div>
+      <div>
+        <h3>Question 5:</h3>
+        <p>What is the largest ocean on Earth?</p>
+        <div class="choices">
+          <input type="radio" name="question4" value="0">
+          <label>Atlantic Ocean</label>
+        </div>
+        <div class="choices">
+          <input type="radio" name="question4" value="1">
+          <label>Pacific Ocean</label>
+        </div>
+        <div class="choices">
+          <input type="radio" name="question4" value="2">
+          <label>Indian Ocean</label>
+        </div>
+        <div class="choices">
+          <input type="radio" name="question4" value="3">
+          <label>Arctic Ocean</label>
+        </div>
+      </div>
+      
+      <div>
+        <h3>Question 6:</h3>
+        <p>Who is the author of the Harry Potter book series?</p>
+        <div class="choices">
+          <input type="radio" name="question5" value="0">
+          <label>J.K. Rowling</label>
+        </div>
+        <div class="choices">
+          <input type="radio" name="question5" value="1">
+          <label>Stephen King</label>
+        </div>
+        <div class="choices">
+          <input type="radio" name="question5" value="2">
+          <label>Suzanne Collins</label>
+        </div>
+        <div class="choices">
+          <input type="radio" name="question5" value="3">
+          <label>George R.R. Martin</label>
+        </div>
+      </div>
+      
+      <div>
+        <h3>Question 7:</h3>
+        <p>What is the largest animal on Earth?</p>
+        <div class="choices">
+          <input type="radio" name="question6" value="0">
+          <label>Elephant</label>
+        </div>
+        <div class="choices">
+          <input type="radio" name="question6" value="1">
+          <label>Giraffe</label>
+        </div>
+        <div class="choices">
+          <input type="radio" name="question6" value="2">
+          <label>Blue whale</label>
+        </div>
+        <div class="choices">
+          <input type="radio" name="question6" value="3">
+          <label>African elephant</label>
+        </div>
+      </div>
+      
+      <div>
+        <h3>Question 8:</h3>
+        <p>Who is known as the "Father of Modern Physics"?</p>
+        <div class="choices">
+          <input type="radio" name="question7" value="0">
+          <label>Albert Einstein</label>
+        </div>
+        <div class="choices">
+          <input type="radio" name="question7" value="1">
+          <label>Isaac Newton</label>
+        </div>
+        <div class="choices">
+          <input type="radio" name="question7" value="2">
+          <label>Galileo Galilei</label>
+        </div>
+        <div class="choices">
+          <input type="radio" name="question7" value="3">
+          <label>Nikola Tesla</label>
+        </div>
+      </div>
+      
+      <div>
+        <h3>Question 9:</h3>
+        <p>Which country is home to the kangaroo?</p>
+        <div class="choices">
+          <input type="radio" name="question8" value="0">
+          <label>Australia</label>
+        </div>
+        <div class="choices">
+          <input type="radio" name="question8" value="1">
+          <label>South Africa</label>
+        </div>
+        <div class="choices">
+          <input type="radio" name="question8" value="2">
+          <label>Argentina</label>
+        </div>
+        <div class="choices">
+          <input type="radio" name="question8" value="3">
+          <label>Canada</label>
+        </div>
+      </div>
+      
+      <div>
+        <h3>Question 10:</h3>
+        <p>What is the symbol for the element oxygen?</p>
+        <div class="choices">
+          <input type="radio" name="question9" value="0">
+          <label>O</label>
+        </div>
+        <div class="choices">
+          <input type="radio" name="question9" value="1">
+          <label>Ca</label>
+        </div>
+        <div class="choices">
+          <input type="radio" name="question9" value="2">
+          <label>Hg</label>
+        </div>
+        <div class="choices">
+          <input type="radio" name="question9" value="3">
+          <label>Na</label>
+        </div>
+      </div>
+      
+      <div>
+        <h3>Question 11:</h3>
+        <p>Which planet is known as the "Red Planet"?</p>
+        <div class="choices">
+          <input type="radio" name="question10" value="0">
+          <label>Venus</label>
+        </div>
+        <div class="choices">
+          <input type="radio" name="question10" value="1">
+          <label>Mars</label>
+        </div>
+        <div class="choices">
+          <input type="radio" name="question10" value="2">
+          <label>Mercury</label>
+        </div>
+        <div class="choices">
+          <input type="radio" name="question10" value="3">
+          <label>Jupiter</label>
+        </div>
+      </div>
+      
+      <div>
+        <h3>Question 12:</h3>
+        <p>Who invented the telephone?</p>
+        <div class="choices">
+          <input type="radio" name="question11" value="0">
+          <label>Thomas Edison</label>
+        </div>
+        <div class="choices">
+          <input type="radio" name="question11" value="1">
+          <label>Alexander Graham Bell</label>
+        </div>
+        <div class="choices">
+          <input type="radio" name="question11" value="2">
+          <label>Albert Einstein</label>
+        </div>
+        <div class="choices">
+          <input type="radio" name="question11" value="3">
+          <label>Marie Curie</label>
+        </div>
+        <div>
+          <h3>Question 13:</h3>
+          <p>What is the largest continent on Earth?</p>
+          <div class="choices">
+            <input type="radio" name="question12" value="0">
+            <label>Asia</label>
+          </div>
+          <div class="choices">
+            <input type="radio" name="question12" value="1">
+            <label>Europe</label>
+          </div>
+          <div class="choices">
+            <input type="radio" name="question12" value="2">
+            <label>Africa</label>
+          </div>
+          <div class="choices">
+            <input type="radio" name="question12" value="3">
+            <label>Australia</label>
+          </div>
+        </div>
+        
+        <div>
+          <h3>Question 14:</h3>
+          <p>Who wrote the play "Romeo and Juliet"?</p>
+          <div class="choices">
+            <input type="radio" name="question13" value="0">
+            <label>William Shakespeare</label>
+          </div>
+          <div class="choices">
+            <input type="radio" name="question13" value="1">
+            <label>George Bernard Shaw</label>
+          </div>
+          <div class="choices">
+            <input type="radio" name="question13" value="2">
+            <label>Anton Chekhov</label>
+          </div>
+          <div class="choices">
+            <input type="radio" name="question13" value="3">
+            <label>Arthur Miller</label>
+          </div>
+        </div>
+        
+        <div>
+          <h3>Question 15:</h3>
+          <p>What is the chemical symbol for silver?</p>
+          <div class="choices">
+            <input type="radio" name="question14" value="0">
+            <label>Ag</label>
+          </div>
+          <div class="choices">
+            <input type="radio" name="question14" value="1">
+            <label>Au</label>
+          </div>
+          <div class="choices">
+            <input type="radio" name="question14" value="2">
+            <label>Cu</label>
+          </div>
+          <div class="choices">
+            <input type="radio" name="question14" value="3">
+            <label>Fe</label>
+          </div>
+        </div>
+        
+        <div>
+          <h3>Question 16:</h3>
+          <p>Who is the current President of the United States?</p>
+          <div class="choices">
+            <input type="radio" name="question15" value="0">
+            <label>Joe Biden</label>
+          </div>
+          <div class="choices">
+            <input type="radio" name="question15" value="1">
+            <label>Donald Trump</label>
+          </div>
+          <div class="choices">
+            <input type="radio" name="question15" value="2">
+            <label>Barack Obama</label>
+          </div>
+          <div class="choices">
+            <input type="radio" name="question15" value="3">
+            <label>George W. Bush</label>
+          </div>
+          <div>
+            <h3>Question 17:</h3>
+            <p>What is the capital of Australia?</p>
+            <div class="choices">
+              <input type="radio" name="question16" value="0">
+              <label>Sydney</label>
+            </div>
+            <div class="choices">
+              <input type="radio" name="question16" value="1">
+              <label>Melbourne</label>
+            </div>
+            <div class="choices">
+              <input type="radio" name="question16" value="2">
+              <label>Canberra</label>
+            </div>
+            <div class="choices">
+              <input type="radio" name="question16" value="3">
+              <label>Brisbane</label>
+            </div>
+          </div>
+          
+          <div>
+            <h3>Question 18:</h3>
+            <p>Who wrote the novel "To Kill a Mockingbird"?</p>
+            <div class="choices">
+              <input type="radio" name="question17" value="0">
+              <label>Harper Lee</label>
+            </div>
+            <div class="choices">
+              <input type="radio" name="question17" value="1">
+              <label>F. Scott Fitzgerald</label>
+            </div>
+            <div class="choices">
+              <input type="radio" name="question17" value="2">
+              <label>J.D. Salinger</label>
+            </div>
+            <div class="choices">
+              <input type="radio" name="question17" value="3">
+              <label>Ernest Hemingway</label>
+            </div>
+          </div>
+          
+          <div>
+            <h3>Question 19:</h3>
+            <p>What is the largest desert in the world?</p>
+            <div class="choices">
+              <input type="radio" name="question18" value="0">
+              <label>Sahara Desert</label>
+            </div>
+            <div class="choices">
+              <input type="radio" name="question18" value="1">
+              <label>Gobi Desert</label>
+            </div>
+            <div class="choices">
+              <input type="radio" name="question18" value="2">
+              <label>Kalahari Desert</label>
+            </div>
+            <div class="choices">
+              <input type="radio" name="question18" value="3">
+              <label>Antarctic Desert</label>
+            </div>
+          </div>
+          
+          <div>
+            <h3>Question 20:</h3>
+            <p>Who is the founder of Microsoft?</p>
+            <div class="choices">
+              <input type="radio" name="question19" value="0">
+              <label>Bill Gates</label>
+            </div>
+            <div class="choices">
+              <input type="radio" name="question19" value="1">
+              <label>Steve Jobs</label>
+            </div>
+            <div class="choices">
+              <input type="radio" name="question19" value="2">
+              <label>Mark Zuckerberg</label>
+            </div>
+            <div class="choices">
+              <input type="radio" name="question19" value="3">
+              <label>Jeff Bezos</label>
+            </div>
+            <div>
+              <h3>Question 21:</h3>
+              <p>Who discovered penicillin?</p>
+              <div class="choices">
+                <input type="radio" name="question20" value="0">
+                <label>Alexander Fleming</label>
+              </div>
+              <div class="choices">
+                <input type="radio" name="question20" value="1">
+                <label>Marie Curie</label>
+              </div>
+              <div class="choices">
+                <input type="radio" name="question20" value="2">
+                <label>Thomas Edison</label>
+              </div>
+              <div class="choices">
+                <input type="radio" name="question20" value="3">
+                <label>Isaac Newton</label>
+              </div>
+            </div>
+            
+            <div>
+              <h3>Question 22:</h3>
+              <p>What is the largest species of shark?</p>
+              <div class="choices">
+                <input type="radio" name="question21" value="0">
+                <label>Giant Hammerhead Shark</label>
+              </div>
+              <div class="choices">
+                <input type="radio" name="question21`" value="1">
+                <label>Goblin Shark</label>
+              </div>
+              <div class="choices">
+                <input type="radio" name="question21" value="2">
+                <label>Tiger Shark</label>
+              </div>
+              <div class="choices">
+                <input type="radio" name="question21" value="3">
+                <label>Whale Shark</label>
+              </div>
+            </div>
+            
+            <div>
+              <h3>Question 23:</h3>
+              <p>What is the largest organ in the human body?</p>
+              <div class="choices">
+                <input type="radio" name="question22" value="0">
+                <label>Heart</label>
+              </div>
+              <div class="choices">
+                <input type="radio" name="question22" value="1">
+                <label>Liver</label>
+              </div>
+              <div class="choices">
+                <input type="radio" name="question22" value="2">
+                <label>Brain</label>
+              </div>
+              <div class="choices">
+                <input type="radio" name="question22" value="3">
+                <label>Skin</label>
+              </div>
+            </div>
+            
+            <div>
+              <h3>Question 24:</h3>
+              <p>Who painted the ceiling of the Sistine Chapel?</p>
+              <div class="choices">
+                <input type="radio" name="question23" value="0">
+                <label>Leonardo da Vinci</label>
+              </div>
+              <div class="choices">
+                <input type="radio" name="question23" value="1">
+                <label>Pablo Picasso</label>
+              </div>
+              <div class="choices">
+                <input type="radio" name="question23" value="2">
+                <label>Michelangelo</label>
+              </div>
+              <div class="choices">
+                <input type="radio" name="question23" value="3">
+                <label>Vincent van Gogh</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  <button onclick="submitExam()">Submit</button>
+
+  <h2>Exam Results</h2>
+  <div id="resultContainer"></div>
+
+  <script>
+    function submitExam() {
+      const nameInput = document.getElementById("nameInput").value.trim();
+
+      if (nameInput === "") {
+        alert("Please enter your name before submitting the exam.");
+        return;
+      }
+
+      let score = 0;
+
+      const selectedChoices = [
+        document.querySelector('input[name="question0"]:checked'),
+        document.querySelector('input[name="question1"]:checked'),
+        document.querySelector('input[name="question2"]:checked'),
+        document.querySelector('input[name="question3"]:checked'),
+        document.querySelector('input[name="question4"]:checked'),
+        document.querySelector('input[name="question5"]:checked'),
+        document.querySelector('input[name="question6"]:checked'),
+        document.querySelector('input[name="question7"]:checked'),
+        document.querySelector('input[name="question8"]:checked'),
+        document.querySelector('input[name="question9"]:checked'),
+        document.querySelector('input[name="question10"]:checked'),
+        document.querySelector('input[name="question11"]:checked'),
+        document.querySelector('input[name="question12"]:checked'),
+        document.querySelector('input[name="question13"]:checked'),
+        document.querySelector('input[name="question14"]:checked'),
+        document.querySelector('input[name="question15"]:checked'),
+        document.querySelector('input[name="question16"]:checked'),
+        document.querySelector('input[name="question17"]:checked'),
+        document.querySelector('input[name="question18"]:checked'),
+        document.querySelector('input[name="question19"]:checked'),
+        document.querySelector('input[name="question20"]:checked'),
+        document.querySelector('input[name="question21"]:checked'),
+        document.querySelector('input[name="question22"]:checked'),
+        document.querySelector('input[name="question23"]:checked'),
+      
+      
+      ];
+
+      const correctAnswers = ["1", "1", "0", "1",
+                              "1", "0", "2", "1",  
+                              "0", "0", "1", "1",  
+                              "0", "0", "0", "0",
+                              "2", "0", "3", "0",
+                              "0", "3", "3", "2" ];
+
+      selectedChoices.forEach((choice, index) => {
+        if (choice && choice.value === correctAnswers[index]) {
+          score++;
+          choice.parentElement.classList.add("correct");
+        } else if (choice) {
+          choice.parentElement.classList.add("wrong");
+          const correctChoice = document.querySelector(`input[name="question${index}"][value="${correctAnswers[index]}"]`);
+          correctChoice.parentElement.classList.add("correct");
+        }
+      });
+
+      const result = {
+        name: nameInput,
+        score: `${score}/${correctAnswers.length}`
+      };
+
+      const totalScore = document.createElement("p");
+      totalScore.textContent = `Name: ${result.name} | You scored ${result.score}`;
+      const resultContainer = document.getElementById("resultContainer");
+      resultContainer.innerHTML = "";
+      resultContainer.appendChild(totalScore);
+    }
+  </script>
+</body>
+</html>
